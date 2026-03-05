@@ -1,0 +1,174 @@
+/* Global Styles & Variables */
+:root {
+  /* Dark Tech Theme */
+  --bg-primary: #0a0e17;
+  /* Deepest dark blue/black */
+  --bg-secondary: #0f1626;
+  /* Slightly lighter base */
+  --bg-glass: rgba(15, 22, 38, 0.7);
+  /* Glassmorphism background */
+
+  --text-primary: #e2e8f0;
+  /* Off-white for readability */
+  --text-secondary: #94a3b8;
+  /* Muted tech grey */
+
+  --accent-cyan: #00f0ff;
+  /* Cybersecurity bright cyan */
+  --accent-blue: #3b82f6;
+  /* Standard tech blue */
+  --accent-purple: #8b5cf6;
+  /* Accent purple */
+  --accent-green: #10b981;
+  /* Success/terminal green */
+
+  /* Gradients */
+  --gradient-tech: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+  --gradient-glow: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+
+  /* Shadows & Effects */
+  --glow-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.05);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glass-blur: blur(12px);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease-in-out;
+  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Base Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+a:hover {
+  filter: brightness(1.2);
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+}
+
+/* Glassmorphism Utility */
+.glass-panel {
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow);
+}
+
+/* Cyber Text Gradient Utility */
+.text-gradient {
+  background: var(--gradient-tech);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+/* Premium Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  background: var(--gradient-tech);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 15px rgba(0, 240, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 240, 255, 0.4);
+  color: #fff;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--accent-cyan);
+  font-weight: 600;
+  border: 1px solid var(--accent-cyan);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 240, 255, 0.1);
+  box-shadow: var(--glow-shadow);
+}
+
+/* Section Container Layouts */
+section {
+  padding: 5rem 2rem;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: var(--gradient-tech);
+  border-radius: 2px;
+}
