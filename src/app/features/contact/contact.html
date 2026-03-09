@@ -56,38 +56,81 @@
             <div class="info-bg-circle small"></div>
         </div>
 
-        <form class="contact-form">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" name="firstName" placeholder="John" required>
-                </div>
-                <div class="form-group">
+        <form class="contact-form" (submit)="onSubmit($event)">
+            <!-- <div class="form-row"> -->
+            <div class="form-group">
+                <label for="firstName"> Name</label>
+                <input type="text" id="firstName" name="entry.1717491353" placeholder="Enter your name" required>
+            </div>
+            <!-- <div class="form-group">
                     <label for="lastName">Last Name</label>
                     <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
-                </div>
-            </div>
+                </div> -->
+            <!-- </div> -->
 
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                <input type="email" id="email" name="entry.1248112852" placeholder="Enter your email address" required>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="subject">Subject</label>
                 <input type="text" id="subject" name="subject" placeholder="Opportunity for SOC Analyst / UI Engineer"
                     required>
-            </div>
+            </div> -->
 
             <div class="form-group">
                 <label for="message">Message</label>
-                <textarea id="message" name="message" rows="5" placeholder="Your message here..." required></textarea>
+                <textarea id="message" name="entry.1501556890" rows="5" placeholder="Your message here..."
+                    required></textarea>
             </div>
 
-            <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;">
-                Send Message
+            <button type="submit" class="btn-primary" [disabled]="isSubmitting" style="width: 100%; margin-top: 1rem;">
+                <span *ngIf="!isSubmitting">Send Message</span>
+                <span *ngIf="isSubmitting">Sending...</span>
             </button>
         </form>
 
+    </div>
+
+    <!-- Confirmation Popup -->
+    <div class="popup-overlay" *ngIf="showPopup" (click)="closePopup()">
+        <div class="popup-content glass-panel" (click)="$event.stopPropagation()">
+            <button class="popup-close" (click)="closePopup()">&times;</button>
+
+            <div class="popup-icon" [class.success]="isSuccess" [class.error]="isError || isIncomplete">
+                <svg *ngIf="isSuccess" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <svg *ngIf="isError || isIncomplete" xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="15" y1="9" x2="9" y2="15"></line>
+                    <line x1="9" y1="9" x2="15" y2="15"></line>
+                </svg>
+            </div>
+
+            <h3 class="popup-title">
+                {{ isSuccess ? 'Message Sent!' : (isIncomplete ? 'Incomplete Form' : 'Submission Failed') }}
+            </h3>
+
+            <p class="popup-message">
+                <ng-container *ngIf="isSuccess">
+                    Thank you for reaching out. I will get back to you as soon as possible.
+                </ng-container>
+                <ng-container *ngIf="isIncomplete">
+                    Please fill out all the required fields before sending your message.
+                </ng-container>
+                <ng-container *ngIf="isError && !isIncomplete">
+                    Something went wrong while sending your message. Please try again later.
+                </ng-container>
+            </p>
+
+            <button class="btn-primary popup-btn" (click)="closePopup()">
+                {{ isSuccess ? 'Great!' : (isIncomplete ? 'Got it' : 'Try Again') }}
+            </button>
+        </div>
     </div>
 </section>
